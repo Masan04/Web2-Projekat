@@ -10,13 +10,6 @@ namespace Projekat.Controllers
     {
         private readonly DataContext _context;
 
-
-        private static List<Item> items = new List<Item>
-        {
-            new Item { Id = 1, Name = "Kazein", Amonunt = 1, Description="suplement", Picture="Neka slika", Price= 10000, SellerId = 1}
-
-        };
-
         [HttpGet]
         public async Task<ActionResult<List<Item>>> Get()
         {
