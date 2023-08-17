@@ -41,6 +41,7 @@ namespace Projekat.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "admin,buyer,seller")]
         public IActionResult UpdateUser(long id,[FromBody]UserRegisterDto userRegisterDto)
         {
             UserRegisterDto user = _userService.UpdateUser(id, userRegisterDto);
@@ -55,6 +56,7 @@ namespace Projekat.Controllers
         }
 
         [HttpGet("{email}")]
+        [Authorize(Roles ="admin,buyer,seller")]
         public IActionResult GetByEmail(string email)
         {
             UserRegisterDto userRegisterDto = _userService.GetByEmail(email);
@@ -63,7 +65,8 @@ namespace Projekat.Controllers
             return Ok(userRegisterDto);
         }
 
-        [HttpGet("id/{id}")]
+        [HttpGet("GetById/{id}")]
+        [Authorize(Roles = "admin,buyer,seller")]
         public IActionResult GetById(long id)
         {
             UserRegisterDto user = _userService.GetUserById(id);

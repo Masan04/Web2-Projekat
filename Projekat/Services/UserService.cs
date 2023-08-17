@@ -6,6 +6,7 @@ using Projekat.Models;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using static Org.BouncyCastle.Math.EC.ECCurve;
 
 namespace Projekat.Services
 {
@@ -15,13 +16,16 @@ namespace Projekat.Services
 
         private readonly IMapper _mapper;
         private readonly DataContext _dataContext;
+        private readonly IVerificationService _verificationService;
 
         private string SecretKey { get; set; }
 
-        public UserService(IMapper mapper,DataContext dataContext)
+        public UserService(IMapper mapper,DataContext dataContext, IConfiguration config, IVerificationService verificationService)
         {
             _mapper = mapper;
             _dataContext = dataContext;
+            _verificationService = verificationService;
+            SecretKey = config.GetSection("Authentication:SecretKey").Value;
         }
 
         public UserRegisterDto AddUser(UserRegisterDto account)
@@ -35,8 +39,12 @@ namespace Projekat.Services
             }
             catch (Exception e)
             {
+                user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
                 _dataContext.Users.Add(user);
                 _dataContext.SaveChanges();
+
+                if (user.Type == UserType.SELLER)
+                    _verificationService.CreateVerification(user.Id);
             }
 
             return _mapper.Map<UserRegisterDto>(user);
@@ -160,38 +168,40 @@ namespace Projekat.Services
             {
                 user = _dataContext.Users.First(u => u.UserEmail == account.UserEmail);
 
-                if (BCrypt.Net.BCrypt.Verify(account.Password, user.Password))
-                {
-                    List<Claim> claims = new List<Claim>();
-                    //Mozemo dodati Claimove u token, oni ce biti vidljivi u tokenu i mozemo ih koristiti za autorizaciju
-                    if (user.Type == UserType.ADMIN)
-                        claims.Add(new Claim(ClaimTypes.Role, "admin")); //Add user type to claim
-                    if (user.Type == UserType.BUYER)
-                        claims.Add(new Claim(ClaimTypes.Role, "buyer")); //Add user type to claim
-                    if (user.Type == UserType.SELLER)
-                        claims.Add(new Claim(ClaimTypes.Role, "seller")); //Add user type to claim
+                List<Claim> claims = new List<Claim>();
+                claims.Add(new Claim(ClaimTypes.Role, "buyer"));
 
-                    //Kreiramo kredencijale za potpisivanje tokena. Token mora biti potpisan privatnim kljucem
-                    //kako bi se sprecile njegove neovlascene izmene
-                    SymmetricSecurityKey secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(SecretKey));
-                    var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
-                    var tokeOptions = new JwtSecurityToken(
-                        issuer: "http://localhost:7194", //url servera koji je izdao token
-                        claims: claims, //claimovi
-                        expires: DateTime.Now.AddMinutes(20), //vazenje tokena u minutama
-                        signingCredentials: signinCredentials //kredencijali za potpis
-                    );
-                    string tokenString = new JwtSecurityTokenHandler().WriteToken(tokeOptions);
-                    return tokenString;
-                }
-                else
-                {
-                    return null;
-                }
+                SymmetricSecurityKey secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(SecretKey));
+                var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
+                var tokeOptions = new JwtSecurityToken(
+                    issuer: "http://localhost:7194",
+                    claims: claims,
+                    expires: DateTime.Now.AddMinutes(20),
+                    signingCredentials: signinCredentials
+                );
+                string tokenString = new JwtSecurityTokenHandler().WriteToken(tokeOptions);
+                return tokenString;
             }
-            catch(Exception e)
+            catch (Exception ex)
             {
-                return null;
+                User newUser = _mapper.Map<User>(account);
+                newUser.Type = UserType.BUYER;
+                _dataContext.Users.Add(newUser);
+                _dataContext.SaveChanges();
+
+                List<Claim> claims = new List<Claim>();
+                claims.Add(new Claim(ClaimTypes.Role, "buyer"));
+
+                SymmetricSecurityKey secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(SecretKey));
+                var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
+                var tokeOptions = new JwtSecurityToken(
+                    issuer: "http://localhost:7194",
+                    claims: claims,
+                    expires: DateTime.Now.AddMinutes(20),
+                    signingCredentials: signinCredentials
+                );
+                string tokenString = new JwtSecurityTokenHandler().WriteToken(tokeOptions);
+                return tokenString;
             }
         }
     }
