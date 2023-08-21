@@ -3,6 +3,7 @@ using Microsoft.IdentityModel.Tokens;
 using Projekat.Dto;
 using Projekat.Interfaces;
 using Projekat.Models;
+using Projekat.Repository;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -17,14 +18,16 @@ namespace Projekat.Services
         private readonly IMapper _mapper;
         private readonly DataContext _dataContext;
         private readonly IVerificationService _verificationService;
+        private readonly UserRepository _userRepository;
 
         private string SecretKey { get; set; }
 
-        public UserService(IMapper mapper,DataContext dataContext, IConfiguration config, IVerificationService verificationService)
+        public UserService(IMapper mapper,DataContext dataContext, IConfiguration config, IVerificationService verificationService, UserRepository userRepository)
         {
             _mapper = mapper;
             _dataContext = dataContext;
             _verificationService = verificationService;
+            _userRepository = userRepository;
             SecretKey = config.GetSection("Authentication:SecretKey").Value;
         }
 
@@ -34,14 +37,13 @@ namespace Projekat.Services
 
             try
             {
-                if (_dataContext.Users.First(u => u.UserEmail == account.UserEmail) != null)
+                if ( _userRepository.FindUser(account.UserEmail) != null)
                     return null;
             }
             catch (Exception e)
             {
                 user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
-                _dataContext.Users.Add(user);
-                _dataContext.SaveChanges();
+                _userRepository.AddUser(user);
 
                 if (user.Type == UserType.SELLER)
                     _verificationService.CreateVerification(user.Id);
@@ -161,12 +163,12 @@ namespace Projekat.Services
             }
         }
 
-        public string LoginGoogle(UserRegisterDto account)
+        public string LoginGoogle(UserLoginDto account)
         {
             User user;
             try
             {
-                user = _dataContext.Users.First(u => u.UserEmail == account.UserEmail);
+                user = _dataContext.Users.First(u => u.UserEmail == account.Email);
 
                 List<Claim> claims = new List<Claim>();
                 claims.Add(new Claim(ClaimTypes.Role, "buyer"));

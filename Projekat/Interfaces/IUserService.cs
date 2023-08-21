@@ -16,7 +16,7 @@ namespace Projekat.Interfaces
 
         List<UserRegisterDto> GetAll();
 
-        string LoginGoogle(UserRegisterDto account);
+        string LoginGoogle(UserLoginDto account);
 
     }
 }

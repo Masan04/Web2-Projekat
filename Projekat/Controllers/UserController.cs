@@ -90,7 +90,7 @@ namespace Projekat.Controllers
         [HttpPost("loginGoogle")]
         public IActionResult LoginGoogle([FromBody] UserLoginDto userLoginDto)
         {
-            var token = _userService.LoginUser(userLoginDto);
+            var token = _userService.LoginGoogle(userLoginDto);
             return token == null ? BadRequest(token) : Ok(token);
         }
     }
