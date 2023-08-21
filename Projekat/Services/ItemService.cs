@@ -2,18 +2,19 @@
 using Projekat.Dto;
 using Projekat.Interfaces;
 using Projekat.Models;
+using Projekat.Repository;
 
 namespace Projekat.Services
 {
     public class ItemService : IItemService
     {
         private readonly IMapper _mapper;
-        private readonly DataContext _dataContext;
+        private readonly ItemRepository _itemRepository;
 
-        public ItemService(IMapper mapper, DataContext dataContext)
+        public ItemService(IMapper mapper, ItemRepository itemRepository)
         {
             _mapper = mapper;
-            _dataContext = dataContext;
+            _itemRepository = itemRepository;
         }
 
         public ItemDto CreateItem(ItemDto itemCreate)
@@ -21,8 +22,7 @@ namespace Projekat.Services
             try
             {
                 Item item = _mapper.Map<Item>(itemCreate);
-                _dataContext.Items.Add(item);
-                _dataContext.SaveChanges();
+                _itemRepository.AddItem(item);
 
                 return _mapper.Map<ItemDto>(item);
             }
@@ -36,9 +36,8 @@ namespace Projekat.Services
         {
             try
             {
-                Item item = _dataContext.Items.Find(id);
-                _dataContext.Items.Remove(item);
-                _dataContext.SaveChanges();
+                Item item = _itemRepository.FindItemById(id);
+                _itemRepository.RemoveItem(item);
 
                 return true;
             }
@@ -52,7 +51,7 @@ namespace Projekat.Services
         {
             try
             {
-                return _mapper.Map<List<ItemDto>>(_dataContext.Items.ToList());
+                return _mapper.Map<List<ItemDto>>(_itemRepository.GetAllItems());
             }
             catch (Exception)
             {
@@ -62,7 +61,7 @@ namespace Projekat.Services
 
         public ItemDto GetItemById(long id)
         {
-            return _mapper.Map<ItemDto>(_dataContext.Items.First(x => x.Id == id));
+            return _mapper.Map<ItemDto>(_itemRepository.FindItemById(id));
         }
 
 
@@ -71,7 +70,7 @@ namespace Projekat.Services
         {
             try
             {
-                List<ItemsInsideOrderDto> itemsInsideOrderDto = _mapper.Map<List<ItemsInsideOrderDto>>(_dataContext.ItemsInsideOrders.ToList().FindAll(i => i.OrderId == orderId));
+                List<ItemOrderDto> itemsInsideOrderDto = _mapper.Map<List<ItemOrderDto>>(_itemRepository.GetItemOrderByOrderId(orderId));
                 List<ItemDto> items = new List<ItemDto>();
                 foreach (var item in itemsInsideOrderDto)
                 {
@@ -95,7 +94,7 @@ namespace Projekat.Services
         {
             try
             {
-                return _mapper.Map<List<ItemDto>>(_dataContext.Items.ToList().FindAll(i => i.SellerId == sellerId));
+                return _mapper.Map<List<ItemDto>>(_itemRepository.GetItemsBySellerId(sellerId));
             }
             catch (Exception e)
             {
@@ -107,18 +106,9 @@ namespace Projekat.Services
         {
             try
             {
-                Item newItem = _mapper.Map<Item>(itemDto);
-                Item itemDb = _dataContext.Items.Find(id);
+                Item item =_itemRepository.UpdateItem(id, itemDto);
 
-                itemDb.Name = newItem.Name;
-                itemDb.Price = newItem.Price;
-                itemDb.Picture = newItem.Picture;
-                itemDb.Amount = newItem.Amount;
-                itemDb.Description = newItem.Description;
-
-                _dataContext.SaveChanges();
-
-                return _mapper.Map<ItemDto>(itemDb);
+                return _mapper.Map<ItemDto>(item);
             }
             catch (Exception)
             {
@@ -128,9 +118,9 @@ namespace Projekat.Services
 
         public ItemDto UpdateItemAfterOrder(long id, int amount)
         {
-            Item itemDb = _dataContext.Items.Find(id);
+            Item itemDb = _itemRepository.FindItemById(id);
             itemDb.Amount -= amount;
-            _dataContext.SaveChanges();
+            _itemRepository.SaveChanges();
 
             return _mapper.Map<ItemDto>(itemDb);
         }

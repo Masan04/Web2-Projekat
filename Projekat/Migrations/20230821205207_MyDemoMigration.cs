@@ -86,7 +86,7 @@ namespace Projekat.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ItemOrder",
+                name: "ItemOrderDto",
                 columns: table => new
                 {
                     ItemsId = table.Column<long>(type: "bigint", nullable: false),
@@ -111,7 +111,7 @@ namespace Projekat.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_ItemOrder_OrdersId",
-                table: "ItemOrder",
+                table: "ItemOrderDto",
                 column: "OrdersId");
         }
 
@@ -119,7 +119,7 @@ namespace Projekat.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "ItemOrder");
+                name: "ItemOrderDto");
 
             migrationBuilder.DropTable(
                 name: "ItemsInsideOrders");

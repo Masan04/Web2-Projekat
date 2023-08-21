@@ -3,9 +3,9 @@ using Projekat.Models;
 
 namespace Projekat.Repository.Configurations
 {
-    public class ItemsInsideOrderConfiguration : IEntityTypeConfiguration<ItemsInsideOrder>
+    public class ItemOrderConfiguration : IEntityTypeConfiguration<ItemOrder>
     {
-        public void Configure(EntityTypeBuilder<ItemsInsideOrder> builder)
+        public void Configure(EntityTypeBuilder<ItemOrder> builder)
         {
             builder.HasKey(x => x.Id);
 

@@ -15,6 +15,7 @@
         public long BuyerId { get; set; }
         public string OrderTime { get; set; }
         public string OrderArriving { get; set; }
-        public List<Item> Items { get; set; }
+        
+        public List<ItemOrder> ItemOrders { get; set; }
     }
 }

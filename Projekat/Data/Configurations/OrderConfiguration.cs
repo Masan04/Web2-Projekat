@@ -16,9 +16,8 @@ namespace Projekat.Data.Configurations
             builder.Property(x => x.Address).HasMaxLength(20);//kazem da je maks duzina 30 karaktera
 
             builder.Property(x => x.Comment).HasMaxLength(30);//kazem da je maks duzina 30 karaktera
+           
 
-            builder.HasMany(x => x.Items)
-                   .WithMany(x => x.Orders);
         }
     }
 }

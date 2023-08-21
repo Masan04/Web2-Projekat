@@ -24,7 +24,7 @@ namespace Projekat.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("ItemOrder", b =>
+            modelBuilder.Entity("ItemOrderDto", b =>
                 {
                     b.Property<long>("ItemsId")
                         .HasColumnType("bigint");
@@ -36,7 +36,7 @@ namespace Projekat.Migrations
 
                     b.HasIndex("OrdersId");
 
-                    b.ToTable("ItemOrder");
+                    b.ToTable("ItemOrderDto");
                 });
 
             modelBuilder.Entity("Projekat.Models.Item", b =>
@@ -73,7 +73,7 @@ namespace Projekat.Migrations
                     b.ToTable("Items");
                 });
 
-            modelBuilder.Entity("Projekat.Models.ItemsInsideOrder", b =>
+            modelBuilder.Entity("Projekat.Models.ItemOrder", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -188,7 +188,7 @@ namespace Projekat.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("ItemOrder", b =>
+            modelBuilder.Entity("ItemOrderDto", b =>
                 {
                     b.HasOne("Projekat.Models.Item", null)
                         .WithMany()

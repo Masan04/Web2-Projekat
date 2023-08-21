@@ -1,6 +1,6 @@
 ﻿namespace Projekat.Dto
 {
-    public class ItemsInsideOrderDto
+    public class ItemOrderDto
     {
         public long Id { get; set; }
         public long ItemId { get; set; }

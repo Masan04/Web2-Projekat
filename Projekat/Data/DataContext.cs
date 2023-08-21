@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Projekat.Models;
+using System.Reflection.Emit;
 
 namespace Projekat.Data
 {
@@ -11,7 +12,7 @@ namespace Projekat.Data
 
         public DbSet<User> Users { get; set; }
 
-        public DbSet<ItemsInsideOrder> ItemsInsideOrders { get; set; }
+        public DbSet<ItemOrder> ItemsInsideOrders { get; set; }
 
         public DbSet<Order> Orders { get; set; }  
 
@@ -19,10 +20,13 @@ namespace Projekat.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
             base.OnModelCreating(modelBuilder);
             //Kazemo mu da pronadje sve konfiguracije u Assembliju i da ih primeni nad bazom
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(DataContext).Assembly);
         }
+
+                    
 
     }
 }
