@@ -5,6 +5,10 @@
         ADMIN = 0, SELLER = 1 , BUYER = 2
     }
 
+    public enum VerificationStatus
+    {
+        IN_PROCESS = 0, ACCEPTED = 1, DENIED = 2
+    }
 
     public class User
     {
@@ -26,6 +30,7 @@
         public UserType Type { get; set; }
 
         public string? Picture { get; set; }
-       
+         public VerificationStatus Status { get; set; }
+
     }
 }

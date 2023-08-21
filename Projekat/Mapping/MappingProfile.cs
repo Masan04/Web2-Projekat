@@ -10,9 +10,10 @@ namespace Projekat.Mapping
         {
             CreateMap<User, UserRegisterDto>().ReverseMap();
             CreateMap<User, UserLoginDto>().ReverseMap();
-            CreateMap<Verification, VerificationDto>().ReverseMap(); 
             CreateMap<Item, ItemDto> ().ReverseMap(); 
             CreateMap<ItemsInsideOrder, ItemsInsideOrderDto>().ReverseMap();
+            CreateMap<Order, OrderDto>().ReverseMap();
+            CreateMap<Order, OrderCancelCheckDto>().ReverseMap();
 
         }
     }

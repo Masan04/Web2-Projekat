@@ -33,6 +33,14 @@ namespace Projekat.Controllers
 
         }
 
+       [HttpPost("verify/{email}")]
+       [Authorize(Roles = "admin")]
+       public IActionResult VerifySeller(string email,[FromBody] bool isVerified)
+        {
+            _userService.UpdateVerificationStatus(isVerified, email);
+            return Ok();
+        }
+
         [HttpPost("login")]
         public IActionResult LoginUser([FromBody]UserLoginDto userLoginDto)
         {

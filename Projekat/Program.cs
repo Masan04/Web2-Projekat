@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.OpenApi.Models;
+using Projekat.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -46,9 +47,13 @@ builder.Services.AddSwaggerGen(c =>
 
 
 builder.Services.AddScoped<IUserService, UserService>();
-builder.Services.AddScoped<IVerificationService, VerificationService>();
 builder.Services.AddScoped<IItemService, ItemService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
 
+
+builder.Services.AddScoped<UserRepository>();
+builder.Services.AddScoped<OrderRepository>();
+builder.Services.AddScoped<ItemRepository>();
 
 builder.Services.AddDbContext<DataContext>(options =>
 {

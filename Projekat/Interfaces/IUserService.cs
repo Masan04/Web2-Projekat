@@ -5,6 +5,7 @@ namespace Projekat.Interfaces
     public interface IUserService
     {
         UserRegisterDto AddUser(UserRegisterDto account);
+        public void UpdateVerificationStatus(bool isVerified, string email);
 
         string LoginUser(UserLoginDto account);
 

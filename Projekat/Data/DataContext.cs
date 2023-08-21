@@ -11,9 +11,11 @@ namespace Projekat.Data
 
         public DbSet<User> Users { get; set; }
 
-        public DbSet<Verification> Verifications { get; set; }
-
         public DbSet<ItemsInsideOrder> ItemsInsideOrders { get; set; }
+
+        public DbSet<Order> Orders { get; set; }  
+
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
