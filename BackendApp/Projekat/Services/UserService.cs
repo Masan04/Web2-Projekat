@@ -192,7 +192,7 @@ namespace Projekat.Services
             SymmetricSecurityKey secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(SecretKey));
             var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
             var tokeOptions = new JwtSecurityToken(
-                issuer: "http://localhost:7194", //url servera koji je izdao token
+                issuer: "http://localhost:7293", //url servera koji je izdao token
                 claims: claims, //claimovi
                 expires: DateTime.Now.AddMinutes(20), //vazenje tokena u minutama
                 signingCredentials: signinCredentials //kredencijali za potpis

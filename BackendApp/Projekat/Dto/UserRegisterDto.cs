@@ -15,6 +15,8 @@ namespace Projekat.Dto
         public UserType Type { get; set; }
         public string Picture { get; set; }
 
+        public VerificationStatus Status { get; set; }
+
     }
 
 

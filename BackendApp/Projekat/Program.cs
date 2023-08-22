@@ -85,7 +85,7 @@ builder.Services.AddAuthentication(opt => {
         ValidateAudience = false, //Kazemo da ne validira primaoce tokena
         ValidateLifetime = true,//Validira trajanje tokena
         ValidateIssuerSigningKey = true, //validira potpis token, ovo je jako vazno!
-        ValidIssuer = "http://localhost:7194", //odredjujemo koji server je validni izdavalac
+        ValidIssuer = "http://localhost:7293", //odredjujemo koji server je validni izdavalac
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration.GetValue<string>("Authentication:SecretKey")))//navodimo privatni kljuc kojim su potpisani nasi tokeni
     };
 });
@@ -95,6 +95,7 @@ builder.Services.AddAuthorization();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddCors();
 
 var app = builder.Build();
 
@@ -104,6 +105,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:3000"));
 
 app.UseHttpsRedirection();
 
@@ -114,3 +116,4 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
