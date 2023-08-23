@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GetEmail, GetRole, GetToken } from "../models/UserModel";
+import { GetEmail, GetRole, GetToken, GetStatus } from "../models/UserModel";
 
 
 export const config =
@@ -51,6 +51,11 @@ export const GetUserById = async (id) =>
 {   
     return await axios.get(process.env.REACT_APP_API_URL + '/api/User/id/' + id, config);
 }
+export const GetVerification = async (isVerified) =>
+{   
+    const email = GetEmail();
+    return await axios.get(process.env.REACT_APP_API_URL + '/api/User/verify/' + email, isVerified);
+}
 
 
 export const AuthUser = () => 
@@ -60,9 +65,10 @@ export const AuthUser = () =>
         return null;
     else
     {
+    
         const role = GetRole();
-        if(role === "prodavac")
-            return null;
+        // if(role === "seller")
+        //     return null;
         return role;
     }
 }

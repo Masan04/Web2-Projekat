@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate  } from "react-router-dom";
-import { LoginUser, LoginGoogle, GetUserAfterLogin } from "../services/UserService";
-import { GetRole, SetEmail, SetRole, SetToken, SetUser, userLoginModel, userModel } from "../models/UserModel";
+import { LoginUser } from "../services/UserService";
+import { SetEmail, SetRole, SetToken, userLoginModel, SetStatus } from "../models/UserModel";
 import jwt from 'jwt-decode';
 
 
@@ -38,9 +38,7 @@ const Login = () => {
             SetToken(response.data);
             SetRole(jwt(response.data));
             SetEmail(account.email);
-
-            if(GetRole() === "prodavac")
-                //await CheckVerification(response.data);
+            SetStatus(jwt(response.data))
                 
             history("/");     
             window.location.reload()
@@ -55,35 +53,6 @@ const Login = () => {
             history("/login");
         }
     }
-
-    
-    // const CheckVerification = async(token) => {
-    //     try{
-    //         const responseUser = await GetUserAfterLogin(token);
-    //         const response = await GetVerificationFromBackend(responseUser.data.id, token);
-    //         if(response.data.status === 0)
-    //         {
-    //           SetVerification('In process');
-    //         }
-    //         else if(response.data.status === 1)
-    //         {
-    //           SetVerification('Accepted');
-    //         }
-    //         else
-    //         {
-    //           SetVerification('Denied');
-    //         }
-    //     }
-    //     catch(e){
-    //         if(e.response.status === 401 || e.response.status === 403)
-    //         {
-    //           localStorage.clear();
-    //           history('/');
-    //         }
-    //     }
-        
-    // }
-
 
 
     const validateEmail = (email) => {

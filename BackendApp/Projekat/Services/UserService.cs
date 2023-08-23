@@ -89,6 +89,15 @@ namespace Projekat.Services
                     if (user.Type == UserType.SELLER)
                         claims.Add(new Claim(ClaimTypes.Role, "seller")); //Add user type to claim
 
+                    if (user.Status == VerificationStatus.ACCEPTED)
+                    {
+                        claims.Add(new Claim(ClaimTypes.UserData, "true"));
+                    }
+                    else
+                    {
+                        claims.Add(new Claim(ClaimTypes.UserData, "false"));
+                    }
+
                     //Kreiramo kredencijale za potpisivanje tokena. Token mora biti potpisan privatnim kljucem
                     //kako bi se sprecile njegove neovlascene izmene
                     return GenerateToken(claims);

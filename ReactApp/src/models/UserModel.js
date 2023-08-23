@@ -56,3 +56,13 @@ export const GetUser =  () =>
 {
     return JSON.parse(localStorage.getItem('user'));
 }
+
+export const GetStatus = () => 
+{
+    return JSON.parse(localStorage.getItem('status'));
+}
+
+export const SetStatus = (status) =>
+{
+    localStorage.setItem('status', status["http://schemas.microsoft.com/ws/2008/06/identity/claims/userdata"])
+}
