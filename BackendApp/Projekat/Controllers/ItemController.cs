@@ -56,7 +56,7 @@ namespace Projekat.Controllers
             return Ok(items);
         }
 
-        [HttpDelete("delete")]
+        [HttpDelete("{id}")]
         [Authorize(Roles ="seller")]
         public IActionResult DeleteItem(long id)
         {

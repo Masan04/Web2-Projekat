@@ -49,7 +49,7 @@ export const UpdateUser = async (id, account) =>
 
 export const GetUserById = async (id) =>
 {   
-    return await axios.get(process.env.REACT_APP_API_URL + '/api/User/id/' + id, config);
+    return await axios.get(process.env.REACT_APP_API_URL + '/api/User/GetById/' + id, config);
 }
 export const GetVerification = async (isVerified) =>
 {   

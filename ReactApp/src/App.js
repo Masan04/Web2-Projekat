@@ -7,7 +7,11 @@ import Login from './components/Login'
 import Profile from './components/Profile';
 import AddItem from './components/AddItem';
 import { AuthUser } from './services/UserService';
-import { GetStatus } from './models/UserModel';
+import ProfileChange from './components/ProfileChange';
+import Items from './components/Items';
+import ChangeItem from './components/ChangeItem';
+import MakeOrder from './components/MakeOrder';
+import NewOrderBuyer from './components/NewOrderBuyer';
 
 function App() {
 
@@ -24,6 +28,11 @@ function App() {
               <Route path="/login" element={!user ? <Login /> : <Navigate to="/" />} />
               <Route path="/profil" element={user ? <Profile /> : <Navigate to="/" />} /> 
               <Route path="/noviArtikal" element={ user? <AddItem/> : <Navigate to ="/"/>} />
+              <Route path="/izmenaProfila" element={user ? <ProfileChange /> : <Navigate to="/" />} />
+              <Route path="/artikli" element={user ? <Items /> : <Navigate to="/" />} />
+              <Route path="/izmenaArtikla" element={user ? <ChangeItem /> : <Navigate to="/" />} />
+              <Route path="/porudzbinaKupac" element={user ? <NewOrderBuyer /> : <Navigate to="/" />} />
+              <Route path="/napraviPorudzbinu/:items" element={user ? <MakeOrder /> : <Navigate to="/" />} />
             </Routes>
           </div>
       </div>

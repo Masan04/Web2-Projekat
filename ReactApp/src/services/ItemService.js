@@ -13,7 +13,7 @@ export const GetItemsBySellerId = async (sellerId) =>
 
 export const DeleteItem = async (id) =>
 {   
-    return await axios.delete(process.env.REACT_APP_API_URL + '/api/Item/' + id, config);
+    return await axios.delete(process.env.REACT_APP_API_URL + '/api/Item/' + id , config);
 }
 
 export const UpdateItem = async (id, item) =>

@@ -434,37 +434,37 @@ cursor: pointer;
   color: #00ffff;
 }
 
-.new-request-buyer-container {
+.new-order-buyer-container {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
 }
 
-.new-request-buyer-content {
+.new-order-buyer-content {
   text-align: center;
 }
 
-.new-request-buyer-title {
+.new-order-buyer-title {
   font-size: 25px;
   color: red;
 }
 
-.new-request-buyer-table {
+.new-order-buyer-table {
   margin-top: 15px;
   border-collapse: collapse;
   width: 120%; 
 }
 
-.new-request-buyer-table th,
-.new-request-buyer-table td {
+.new-order-buyer-table th,
+.new-order-buyer-table td {
   padding: 14px;
   text-align: left;
   border-bottom: 1px solid #ddd;
   font-size: 18px; 
 }
 
-.new-request-buyer-button {
+.new-order-buyer-button {
   text-decoration: none;
   margin-top: 0px;
   background-color: #4caf50;
@@ -476,11 +476,11 @@ cursor: pointer;
   font-size: 16px;
 }
 
-.new-request-buyer-button:hover {
+.new-order-buyer-button:hover {
   color: #00ffff;
 }
 
-.new-request-buyer-container input, .new-request-buyer textarea{
+.new-order-buyer-container input, .new-order-buyer textarea{
   padding: 6px 10px;
   margin: 10px 0;
   border: 1px solid #ddd;
@@ -488,7 +488,7 @@ cursor: pointer;
   display: block;
 }
 
-.new-request-buyer-container .error {
+.new-order-buyer-container .error {
   color: red;
 }
 
@@ -497,42 +497,42 @@ cursor: pointer;
   color: rgb(227 48 188 / 83%);
 }
 
-.make-request-container {
+.make-order-container {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
 }
 
-.make-request-content {
+.make-order-content {
   text-align: center;
 }
 
-.make-request-table {
+.make-order-table {
   margin-top: 15px;
   margin-left: -70px;
   border-collapse: collapse;
   width: 125%; 
 }
 
-.make-request-table th,
-.make-request-table td {
+.make-order-table th,
+.make-order-table td {
   padding: 14px;
   text-align: left;
   border-bottom: 1px solid #ddd;
   font-size: 18px; 
 }
 
-.make-request-container label {
+.make-order-container label {
   text-align: left;
   display: block;
 }
-.make-request-container h2 {
+.make-order-container h2 {
   font-size: 25px;
   color: rgb(227 48 188 / 83%);
   margin-bottom: 20px;
 }
-.make-request-container input, .make-request-container textarea, .make-request-container select {
+.make-order-container input, .make-order-container textarea, .make-order-container select {
   width: 100%;
   padding: 6px 10px;
   margin: 10px 0;
@@ -540,14 +540,14 @@ cursor: pointer;
   box-sizing: border-box;
   display: block;
 }
-.make-request-container a{
+.make-order-container a{
   font-size: 20px;
   padding: 2px;
 }
-.make-request-container a:hover {
+.make-order-container a:hover {
   color: #00ffff;
 }
-.make-request-container button {
+.make-order-container button {
   text-decoration: none;
   margin-top: 15px;
   background-color: #4caf50;
@@ -557,15 +557,15 @@ cursor: pointer;
   border-radius: 4px;
   cursor: pointer;
 }
-.make-request-container button:hover {
+.make-order-container button:hover {
   color: #00ffff;
 }
 
-.make-request-container .inputType{
+.make-order-container .inputType{
   margin-left: -100px;
 }
 
-.make-request-container .error, .cijena {
+.make-order-container .error, .cijena {
   color: red;
 }
 
