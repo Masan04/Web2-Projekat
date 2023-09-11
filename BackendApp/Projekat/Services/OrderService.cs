@@ -56,12 +56,12 @@ namespace Projekat.Services
             long itemId = itemAmount.itemId;
             int amount = itemAmount.amount;
             _itemService.UpdateItemAfterOrder(itemId, amount);
-            ItemOrderDto itemOrderDto = new ItemOrderDto();
-            itemOrderDto.ItemId = itemId;
-            itemOrderDto.OrderId = order.Id;
-            itemOrderDto.Amount = amount;
+            ItemOrder itemOrder = new ItemOrder();
+            itemOrder.ItemId = itemId;
+            itemOrder.OrderId = order.Id;
+            itemOrder.Amount = amount;
 
-            ItemOrder itemOrder = _mapper.Map<ItemOrder>(itemOrderDto);
+           //ItemOrder itemOrder = _mapper.Map<ItemOrder>(itemOrderDto);
 
             _orderRepository.AddItemsInsideOrder(itemOrder);
         }
@@ -74,7 +74,7 @@ namespace Projekat.Services
                 foreach (var orderItem in itemsInsideOrder)
                 {
                    
-                    orderItem.Item.Amount += orderItem.Amount;
+                    orderItem.Amount += orderItem.Amount;
 
                     _orderRepository.SaveChanges();
                 }

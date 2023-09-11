@@ -12,6 +12,9 @@ import Items from './components/Items';
 import ChangeItem from './components/ChangeItem';
 import MakeOrder from './components/MakeOrder';
 import NewOrderBuyer from './components/NewOrderBuyer';
+import MyOrder from './components/MyOrder';
+import NewOrderSeller from './components/NewOrderSeller';
+import Request from './components/Request';
 
 function App() {
 
@@ -33,6 +36,9 @@ function App() {
               <Route path="/izmenaArtikla" element={user ? <ChangeItem /> : <Navigate to="/" />} />
               <Route path="/porudzbinaKupac" element={user ? <NewOrderBuyer /> : <Navigate to="/" />} />
               <Route path="/napraviPorudzbinu/:items" element={user ? <MakeOrder /> : <Navigate to="/" />} />
+              <Route path="/mojePorudzbine" element={user ? <MyOrder /> : <Navigate to="/" />} />
+              <Route path="/novePorudzbineProdavac" element={user ? <NewOrderSeller /> : <Navigate to="/" />} />
+              <Route path="/napraviPorudzbinu/[]" element={user ? <Request /> : <Navigate to="/" />} />
             </Routes>
           </div>
       </div>

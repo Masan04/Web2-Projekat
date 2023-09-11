@@ -6,8 +6,7 @@ export const orderCreateModel = ({
     buyerId: -1,
     orderTime: '',
     orderArriving: '',
-    ids: [],
-    amounts: [],
+    itemAmounts:[{itemId: -1, amount: -1}]
   });
 
   export const orderModel = ({
@@ -17,5 +16,5 @@ export const orderCreateModel = ({
     sellerId: -1,
     buyerId: -1,
     orderTime: '',
-    orderArriving: '',
+    orderArriving: ''
   });

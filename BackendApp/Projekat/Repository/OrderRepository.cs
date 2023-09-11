@@ -1,4 +1,5 @@
-﻿using Projekat.Models;
+﻿using Projekat.Dto;
+using Projekat.Models;
 
 namespace Projekat.Repository
 {
@@ -26,7 +27,7 @@ namespace Projekat.Repository
         }
         public List<ItemOrder>? FindItemOrderByOrderId(long id)
         {
-            return _dataContext.ItemsInsideOrders.ToList().FindAll(x => x.Order.Id == id);
+            return _dataContext.ItemsInsideOrders.ToList().FindAll(x => x.OrderId == id);
         }
 
         public void SaveChanges()

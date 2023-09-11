@@ -36,7 +36,7 @@ namespace Projekat.Repository
 
         public List<ItemOrder> GetItemOrderByOrderId(long orderId)
         {
-            return _dataContext.ItemsInsideOrders.ToList().FindAll(i => i.Order.Id == orderId);
+            return _dataContext.ItemsInsideOrders.ToList().FindAll(i => i.OrderId == orderId);
         }
         public List<Item> GetItemsBySellerId(long sellerId)
         {

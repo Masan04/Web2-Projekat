@@ -46,13 +46,15 @@ const NewOrderBuyer = () => {
         const updatedItems = [];
         for (const item of tempItems) {
           const { sellerId } = item;
-      
+
           let sellerUsername;
           if (sellers.hasOwnProperty(sellerId)) {
             sellerUsername = sellers[sellerId];
           } else {
             try {
-              const response = await GetUserById(sellerId);y
+              if (sellerId === 0)
+                  continue;
+              const response = await GetUserById(sellerId);        
               let seller = userModel;
               seller = response.data;
               sellerUsername = seller.username;
@@ -104,6 +106,7 @@ const NewOrderBuyer = () => {
         updatedItemsOrder.push(updatedItem);
         setItemsOrder(updatedItemsOrder);
         SetBasket(updatedItemsOrder);
+        console.log(itemsOrder);
     };
 
     return ( 
@@ -152,7 +155,7 @@ const NewOrderBuyer = () => {
                     </tbody>
                 </table>
                 <br />
-                <Link className="new-order-buyer-button" to={`/napravi/Porudzbinu/${encodeURIComponent(JSON.stringify(itemsOrder))}`}>Korpa</Link>
+                <Link className="new-order-buyer-button" to={`/napraviPorudzbinu/${encodeURIComponent(JSON.stringify(itemsOrder))}`}>Korpa</Link>
             </div>
         </div>
      );

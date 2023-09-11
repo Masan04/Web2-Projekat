@@ -55,14 +55,19 @@ const MakeOrder = () => {
                 let sellerItems = itemModel;
                 sellerItems = parsedItems.filter((item) => item.prodavac === sellerId);
 
+                let itemAmounts = [];
                 const ids = sellerItems.map((item) => item.id);
                 const amounts = sellerItems.map((item) => item.amount);
+                for(let i = 0;i < ids.length;i++){
+                    itemAmounts.push({itemId: ids[i], amount: amounts[i]});
+                }
                 const price = postarina + sellerItems.reduce((sum, item) => sum + item.price * item.amount, 0);
                 const sellerIdNumber = sellerItems.map((item) => item.sellerId);
 
                 let order = orderCreateModel;
-                order = { price, comment, address, sellerId : sellerIdNumber[0], buyerId, orderTime : currentTime, orderArriving : "", ids, amounts };
+                order = { price, comment, address, sellerId : sellerIdNumber[0], buyerId, orderTime : currentTime, orderArriving : "", itemAmounts };
 
+                console.log(order);
                 const response = await CreateOrder(order);
             });
 
