@@ -47,17 +47,17 @@ namespace Projekat.Repository
 
         public List<Order> GetPastOrdersBySeller(long sellerId)
         {
-            return _dataContext.Orders.ToList().FindAll(x => x.SellerId == sellerId && x.Status == OrderStatus.DONE);
+            return _dataContext.Orders.ToList().FindAll(x => x.SellerId == sellerId);
         }
 
         public List<Order> GetNewOrdersBySeller(long sellerId)
         {
-            return _dataContext.Orders.ToList().FindAll(x => x.SellerId == sellerId && x.Status == OrderStatus.CANCELED);
+            return _dataContext.Orders.ToList().FindAll(x => x.SellerId == sellerId);
         }
 
         public List<Order> GetOrdersByBuyer(long buyerId)
         {
-            return _dataContext.Orders.ToList().FindAll(x => x.BuyerId == buyerId && x.Status == OrderStatus.CANCELED);
+            return _dataContext.Orders.ToList().FindAll(x => x.BuyerId == buyerId);
         }
 
     }

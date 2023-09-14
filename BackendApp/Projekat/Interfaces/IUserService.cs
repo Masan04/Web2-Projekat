@@ -5,7 +5,7 @@ namespace Projekat.Interfaces
     public interface IUserService
     {
         UserRegisterDto AddUser(UserRegisterDto account);
-        public void UpdateVerificationStatus(bool isVerified, string email);
+        public void UpdateVerificationStatus(UserRegisterDto user, long id);
 
         string LoginUser(UserLoginDto account);
 
@@ -17,7 +17,7 @@ namespace Projekat.Interfaces
 
         List<UserRegisterDto> GetAll();
 
-        string LoginGoogle(UserLoginDto account);
+        string LoginGoogle(UserRegisterDto account);
 
     }
 }

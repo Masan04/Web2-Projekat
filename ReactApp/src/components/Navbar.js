@@ -31,8 +31,11 @@ const Navbar = () => {
         {isLoggedIn && role === "seller" && status && <Link to="/noviArtikal">Dodaj artikal</Link>}
         {isLoggedIn && role === 'seller' && status && <Link to="/artikli">Lista artikala</Link>}
         {isLoggedIn && role === "buyer" && <Link to="/porudzbinaKupac">Nova porudzbina</Link>}
-        {isLoggedIn && role === "kupac" && <Link to="/prethodnePorudzbine">Prethodne porudzbine</Link>}
+        {isLoggedIn && role === "buyer" && <Link to="/prethodnePorudzbine">Prethodne porudzbine</Link>}
         {isLoggedIn && role === 'seller' && status && <Link to="/mojePorudzbine">Moje porudzbine</Link>}
+        {isLoggedIn && role === 'seller' && status && <Link to="/novePorudzbineProdavac">Nove porudzbine</Link>}
+        {isLoggedIn && role === "admin" && <Link to="/svePorudzbine">Sve porudzbine</Link>}   
+        {isLoggedIn && role === "admin" && <Link to="/verification">Korisnici</Link>}   
       </div>
     </nav>
   );

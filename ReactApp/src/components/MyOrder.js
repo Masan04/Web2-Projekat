@@ -64,13 +64,13 @@ const MyOrder = () => {
     };
 
     return ( 
-        <div className="past-orders-container">
-            <div className="past-orders-content">
-            {orders.length > 0 && <h2 className="past-orders-title">Stare porudzbine</h2>}
-            {orders.length === 0 && <h2 className="past-orders-title">Nemate starih porudzbina!</h2>}
+        <div className="past-requests-container">
+            <div className="past-requests-content">
+            {orders.length > 0 && <h2 className="past-requests-title">Stare porudzbine</h2>}
+            {orders.length === 0 && <h2 className="past-requests-title">Nemate starih porudzbina!</h2>}
             {orders.length > 0 && orders.map((order) => (
                 <div key={order.id}>
-                    <table className="past-orders-table-order">
+                    <table className="past-requests-table-order">
                         <thead>
                             <tr>
                                 <th>Cena</th>
@@ -92,7 +92,7 @@ const MyOrder = () => {
                             </tr>
                         </tbody>
                     </table>
-                    <table className="past-orders-table">
+                    <table className="past-requests-table">
                         <thead>
                             <tr>
                                 <th>Naziv</th>

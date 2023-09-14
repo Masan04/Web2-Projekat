@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GetEmail, GetRole, GetToken, GetStatus } from "../models/UserModel";
+import { GetEmail, GetRole, GetToken, GetStatus, userModel } from "../models/UserModel";
 
 
 export const config =
@@ -11,12 +11,12 @@ export const config =
 
 export const AddUser = async (account) =>
 {
-    return await axios.post('https://localhost:7293' + '/api/User/register', account);
+    return await axios.post(process.env.REACT_APP_API_URL + '/api/User/register', account);
 }
 
 export const LoginUser = async (account) =>
 {
-    return await axios.post('https://localhost:7293' + '/api/User/login', account);
+    return await axios.post(process.env.REACT_APP_API_URL + '/api/User/login', account);
 }
 
 export const LoginGoogle = async (account) =>
@@ -54,7 +54,17 @@ export const GetUserById = async (id) =>
 export const GetVerification = async (isVerified) =>
 {   
     const email = GetEmail();
+    console.log(email);
     return await axios.get(process.env.REACT_APP_API_URL + '/api/User/verify/' + email, isVerified);
+}
+
+export const SetVerification = async (id, isVerified) =>
+{   
+    let user = userModel;
+    user.id = id;
+    user.status = isVerified;
+    console.log(user);
+    return await axios.put(process.env.REACT_APP_API_URL + '/api/User/verify/' + id, user, config);
 }
 
 
@@ -67,8 +77,6 @@ export const AuthUser = () =>
     {
     
         const role = GetRole();
-        // if(role === "seller")
-        //     return null;
         return role;
     }
 }

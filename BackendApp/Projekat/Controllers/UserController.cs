@@ -33,11 +33,11 @@ namespace Projekat.Controllers
 
         }
 
-       [HttpPost("verify/{email}")]
+       [HttpPut("verify/{id}")]
        [Authorize(Roles = "admin")]
-       public IActionResult VerifySeller(string email,[FromBody] bool isVerified)
+       public IActionResult VerifySeller(long id, [FromBody] UserRegisterDto user)
         {
-            _userService.UpdateVerificationStatus(isVerified, email);
+            _userService.UpdateVerificationStatus(user, id);
             return Ok();
         }
 
@@ -96,7 +96,7 @@ namespace Projekat.Controllers
         }
 
         [HttpPost("loginGoogle")]
-        public IActionResult LoginGoogle([FromBody] UserLoginDto userLoginDto)
+        public IActionResult LoginGoogle([FromBody] UserRegisterDto userLoginDto)
         {
             var token = _userService.LoginGoogle(userLoginDto);
             return token == null ? BadRequest(token) : Ok(token);

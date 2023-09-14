@@ -53,18 +53,18 @@ namespace Projekat.Services
          
         }
 
-        public void UpdateVerificationStatus(bool isVerified, string email)
+        public void UpdateVerificationStatus(UserRegisterDto user, long id)
         {
-            User user = _userRepository.FindUser(email);
+            User userFromDb = _userRepository.FindUserById(id);
 
-            if (isVerified)
+            if (user.Status == VerificationStatus.ACCEPTED)
             {
-                
-                user.Status = VerificationStatus.ACCEPTED;
+
+                userFromDb.Status = VerificationStatus.ACCEPTED;
             }
             else
             {
-                user.Status = VerificationStatus.DENIED;
+                userFromDb.Status = VerificationStatus.DENIED;
             }
 
             _userRepository.SaveChanges();
@@ -171,29 +171,45 @@ namespace Projekat.Services
         }
 
 
-        public string LoginGoogle(UserLoginDto account)
+        public string LoginGoogle(UserRegisterDto account)
         {
             User user;
-            try
+
+            user = _userRepository.FindUser(account.UserEmail);
+
+            List<Claim> claims = new List<Claim>();
+
+            if (user == null)
             {
-                user = _userRepository.FindUser(account.Email);
+                    User newUser = _mapper.Map<User>(account);
+                    newUser.Type = UserType.BUYER;
+                    _userRepository.SaveUser(newUser);
 
-                List<Claim> claims = new List<Claim>();
-                claims.Add(new Claim(ClaimTypes.Role, "buyer"));
+                    claims.Add(new Claim(ClaimTypes.Role, "buyer"));
 
-                return GenerateToken(claims);
+                    return GenerateToken(claims);
             }
-            catch (Exception ex)
+
+            if (user.Type == UserType.ADMIN)
+                claims.Add(new Claim(ClaimTypes.Role, "admin"));
+            if (user.Type == UserType.BUYER)
+                claims.Add(new Claim(ClaimTypes.Role, "buyer"));
+            if (user.Type == UserType.SELLER)
             {
-                User newUser = _mapper.Map<User>(account);
-                newUser.Type = UserType.BUYER;
-                _userRepository.SaveUser(newUser);
+                claims.Add(new Claim(ClaimTypes.Role, "seller"));
 
-                List<Claim> claims = new List<Claim>();
-                claims.Add(new Claim(ClaimTypes.Role, "buyer"));
-
-                return GenerateToken(claims);
+                if (user.Status == VerificationStatus.ACCEPTED)
+                {
+                    claims.Add(new Claim(ClaimTypes.UserData, "true"));
+                }
+                else
+                {
+                    claims.Add(new Claim(ClaimTypes.UserData, "false"));
+                }
             }
+                
+
+            return GenerateToken(claims);
         }
 
         private string GenerateToken(List<Claim> claims)

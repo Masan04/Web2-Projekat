@@ -140,6 +140,7 @@ const ProfileChange = () => {
                 <input
                     type="text"
                     value={email}
+                    readOnly
                     onChange={(e) => setEmail(e.target.value)}
                 />
                 {errors.email && <p className="error">{errors.email}</p>}

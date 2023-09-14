@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate  } from "react-router-dom";
-import { LoginUser } from "../services/UserService";
-import { SetEmail, SetRole, SetToken, userLoginModel, SetStatus } from "../models/UserModel";
+import { LoginGoogle, LoginUser } from "../services/UserService";
+import { SetEmail, SetRole, SetToken, userLoginModel, SetStatus, userModel } from "../models/UserModel";
 import jwt from 'jwt-decode';
-
+import jwtDecode from "jwt-decode";
 
 const Login = () => {
 
@@ -11,6 +11,49 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [errors, setErrors] = useState({});
     const history = useNavigate();
+
+    useEffect(() => {
+        /* global google */
+        google.accounts.id.initialize({
+          client_id: process.env.REACT_APP_API_CLIENT_ID,
+          callback: handleCallbackResponse
+        });
+        google.accounts.id.renderButton(
+          document.getElementById("signInDiv"),
+          { theme: "outline", size: "large"}
+        )
+      }, []);
+
+      function handleCallbackResponse(response){
+        var userObject = jwtDecode(response.credential);
+
+        let user = userModel;
+        user.useremail = userObject.email;
+        user.name = userObject.given_name;
+        user.surname = userObject.family_name;
+
+        LoginWithGoogle(user);
+    }
+
+    const LoginWithGoogle = async (user) => {
+        try{
+            console.log(user);
+            const response = await LoginGoogle(user);
+            SetToken(response.data);
+            SetRole(jwt(response.data));
+            SetEmail(user.useremail);
+            SetStatus(jwt(response.data))
+            history("/");     
+            window.location.reload();
+        }
+        catch(e){
+            if(e.response.status === 401 || e.response.status === 403)
+            {
+              localStorage.clear();
+              history('/');
+            }
+        }
+    }
 
     const handleSubmit = async(e) => {
         e.preventDefault();
