@@ -19,5 +19,7 @@ namespace Projekat.Interfaces
 
         string LoginGoogle(UserRegisterDto account);
 
+        Task<UserRegisterDto> UploadImageToProfile(int userId, PhotoUploadDto photo);
+
     }
 }

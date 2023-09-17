@@ -101,5 +101,32 @@ namespace Projekat.Controllers
             var token = _userService.LoginGoogle(userLoginDto);
             return token == null ? BadRequest(token) : Ok(token);
         }
+        [HttpPost("upload-profile-picture")]
+        [Authorize]
+        public async Task<IActionResult> UploadProfilePicture([FromBody] PhotoUploadDto picture)
+        {
+            if (picture == null || picture.Picture == null)
+            {
+                return BadRequest(new { Message = "No picture provided" });
+            }
+
+            UserRegisterDto user = null;
+
+
+            try
+            {
+                int userId = Int32.Parse(User.Claims.First(c => c.Type == "UserId").Value);
+
+                user = await _userService.UploadImageToProfile(userId, picture);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { Message = ex.Message });
+            }
+
+            if (user == null)
+                return BadRequest();
+            return Ok(user);
+        }
     }
 }

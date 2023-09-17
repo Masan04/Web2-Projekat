@@ -17,6 +17,7 @@ namespace Projekat.Services
 
         private readonly IMapper _mapper;
         private readonly UserRepository _userRepository;
+        private readonly IConfiguration _configuration;
 
         private string SecretKey { get; set; }
 
@@ -24,6 +25,7 @@ namespace Projekat.Services
         {
             _mapper = mapper;
             _userRepository = userRepository;
+            _configuration = config; 
             SecretKey = config.GetSection("Authentication:SecretKey").Value;
         }
 
@@ -210,6 +212,44 @@ namespace Projekat.Services
                 
 
             return GenerateToken(claims);
+        }
+
+        public async Task<UserRegisterDto> UploadImageToProfile(int userId, PhotoUploadDto photo)
+        {
+            List<User>? users = _userRepository.GetAllUsers();
+
+            User user = users.FirstOrDefault(u => u.Id == userId);
+            if (user == null)
+                throw new Exception("User not found in the DB!");
+
+            if (photo == null || photo.Picture == null)
+                throw new Exception("Image cannot be null!");
+
+            string extension = ".jpg";
+            string fileName = Path.ChangeExtension(
+                Path.GetRandomFileName(),
+                extension
+            );
+
+            string path = String.Format("{0}{1}", _configuration["ImageStoragePath"], fileName);
+
+            using (var ms = new MemoryStream(photo.Picture))
+            {
+                using (var fs = new FileStream(path, FileMode.Create))
+                {
+                    ms.WriteTo(fs);
+                }
+            }
+
+            string imageAccessPath = String.Format("{0}{1}", _configuration["ImageAccessPath"], fileName);
+
+
+            user.Picture = imageAccessPath;
+
+            _userRepository.SaveUser(user);
+
+            return _mapper.Map<User, UserRegisterDto>(user);
+
         }
 
         private string GenerateToken(List<Claim> claims)

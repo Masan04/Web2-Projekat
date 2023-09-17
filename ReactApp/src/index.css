@@ -8,6 +8,7 @@
   background-color: #71c0d8;
   font-family: "Times New Roman", Times, serif;
 }
+
 .navbar {
   padding: 20px;
   display: flex;
@@ -16,27 +17,32 @@
   border-bottom: 1px solid #f2f2f2;
   box-shadow: rgba(240, 46, 170, 0.4) 0px 5px, rgba(240, 46, 170, 0.3) 0px 10px, rgba(240, 46, 170, 0.2) 0px 15px, rgba(240, 46, 170, 0.1) 0px 20px, rgba(240, 46, 170, 0.05) 0px 25px;
 }
+
 .navbar h1 {
   /* color:  rgb(227 48 188 / 83%); */
   color: #cf1591;
-    background-color: #71c0d8;
-    letter-spacing: .1em;
-    text-shadow: 
-      -1px -1px 1px #a384a0, 
-      2px 2px 1px #3f273c;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  background-color: #71c0d8;
+  letter-spacing: .1em;
+  text-shadow:
+    -1px -1px 1px #a384a0,
+    2px 2px 1px #3f273c;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
+
 .navbar .links {
   margin-left: auto;
 }
+
 .navbar a {
   margin-left: 16px;
   text-decoration: none;
   padding: 6px;
 }
+
 .navbar a:hover {
   color: #f1356d;
 }
+
 .content {
   max-width: 600px;
   margin: 40px auto;
@@ -57,20 +63,22 @@
 }
 
 .button {
-text-decoration: none;
-margin-top: 20px;
-background-color: #4caf50;
-color: white;
-border: none;
-padding: 10px 20px;
-border-radius: 4px;
-cursor: pointer;
+  text-decoration: none;
+  margin-top: 20px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
 }
-.button:hover{
+
+.button:hover {
   background-color: #45a049;
 }
 
-.home p, a {
+.home p,
+a {
   font-size: 20px;
   padding: 10px;
 }
@@ -79,13 +87,15 @@ cursor: pointer;
   color: #00ffff;
 }
 
-.not-found h1{
+.not-found h1 {
   font-size: 42px;
 }
-.not-found a{
+
+.not-found a {
   font-size: 20px;
   padding: 2px;
 }
+
 .not-found a:hover {
   color: #00ffff;
 }
@@ -95,16 +105,21 @@ cursor: pointer;
   margin: 0 auto;
   text-align: center;
 }
+
 .login label {
   text-align: left;
   display: block;
 }
+
 .login h2 {
   font-size: 25px;
-  color:  rgb(227 48 188 / 83%);
+  color: rgb(227 48 188 / 83%);
   margin-bottom: 20px;
 }
-.login input, .login textarea, .login select {
+
+.login input,
+.login textarea,
+.login select {
   width: 100%;
   padding: 6px 10px;
   margin: 10px 0;
@@ -112,13 +127,16 @@ cursor: pointer;
   box-sizing: border-box;
   display: block;
 }
-.login a{
+
+.login a {
   font-size: 20px;
   padding: 2px;
 }
+
 .login a:hover {
   color: #00ffff;
 }
+
 .button-login {
   text-decoration: none;
   margin-top: 15px;
@@ -129,6 +147,7 @@ cursor: pointer;
   border-radius: 4px;
   cursor: pointer;
 }
+
 .button-login:hover {
   color: #00ffff;
 }
@@ -137,7 +156,7 @@ cursor: pointer;
   background-color: white;
 }
 
-.login .error{
+.login .error {
   color: rgb(227 48 188 / 83%);
 }
 
@@ -146,16 +165,21 @@ cursor: pointer;
   margin: 0 auto;
   text-align: center;
 }
+
 .register label {
   text-align: left;
   display: block;
 }
+
 .register h2 {
   font-size: 25px;
-  color:  rgb(227 48 188 / 83%);
+  color: rgb(227 48 188 / 83%);
   margin-bottom: 20px;
 }
-.register input, .register textarea, .register select {
+
+.register input,
+.register textarea,
+.register select {
   width: 100%;
   padding: 6px 10px;
   margin: 10px 0;
@@ -163,13 +187,16 @@ cursor: pointer;
   box-sizing: border-box;
   display: block;
 }
-.register a{
+
+.register a {
   font-size: 20px;
   padding: 2px;
 }
+
 .register a:hover {
   color: #00ffff;
 }
+
 .register button {
   text-decoration: none;
   margin-top: 15px;
@@ -180,22 +207,26 @@ cursor: pointer;
   border-radius: 4px;
   cursor: pointer;
 }
+
 .register button:hover {
   color: #00ffff;
 }
-.register .typeLabel{
+
+.register .typeLabel {
   text-align: center;
 }
+
 .register .type {
   display: flex;
   align-items: center;
 }
-.register .inputType{
+
+.register .inputType {
   margin-left: -100px;
 }
 
 .register .error {
-  color:  rgb(227 48 188 / 83%);
+  color: rgb(227 48 188 / 83%);
 }
 
 .profile-container {
@@ -204,7 +235,13 @@ cursor: pointer;
   align-items: center;
 }
 
-.profile-container h2{
+.cont-align {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly
+}
+
+.profile-container h2 {
   font-size: 25px;
   color: rgb(227 48 188 / 83%);
   margin-bottom: 10px;
@@ -224,7 +261,7 @@ cursor: pointer;
 
 .user-info {
   text-align: left;
-  margin-top: -190px;
+  margin-right: 10px;
   font-size: 1.5em;
 }
 
@@ -257,7 +294,7 @@ cursor: pointer;
 .verification-box {
   align-self: flex-start;
   margin-top: -570px;
-  margin-left: 540px;
+  margin-left: 600px;
   border: 1px solid #ccc;
   border-radius: 4px;
   width: 200px;
@@ -295,6 +332,7 @@ cursor: pointer;
   width: 100%;
 }
 
+
 .verification-table th,
 .verification-table td {
   padding: 12px;
@@ -324,16 +362,21 @@ cursor: pointer;
   margin: 0 auto;
   text-align: center;
 }
+
 .add-item label {
   text-align: left;
   display: block;
 }
+
 .add-item h2 {
   font-size: 25px;
   color: rgb(227 48 188 / 83%);
   margin-bottom: 20px;
 }
-.add-item input, .add-item textarea, .add-item select {
+
+.add-item input,
+.add-item textarea,
+.add-item select {
   width: 100%;
   padding: 6px 10px;
   margin: 10px 0;
@@ -341,13 +384,16 @@ cursor: pointer;
   box-sizing: border-box;
   display: block;
 }
-.add-item a{
+
+.add-item a {
   font-size: 20px;
   padding: 2px;
 }
+
 .add-item a:hover {
   color: #00ffff;
 }
+
 .add-item button {
   text-decoration: none;
   margin-top: 15px;
@@ -358,10 +404,12 @@ cursor: pointer;
   border-radius: 4px;
   cursor: pointer;
 }
+
 .add-item button:hover {
   color: #00ffff;
 }
-.add-item .inputType{
+
+.add-item .inputType {
   margin-left: -100px;
 }
 
@@ -372,7 +420,7 @@ cursor: pointer;
 .verification-box {
   align-self: flex-start;
   margin-top: -570px;
-  margin-left: 540px;
+  margin-left: 600px;
   border: 1px solid #ccc;
   border-radius: 4px;
   width: 200px;
@@ -447,13 +495,13 @@ cursor: pointer;
 
 .new-order-buyer-title {
   font-size: 25px;
-  color:  rgb(227 48 188 / 83%);
+  color: rgb(227 48 188 / 83%);
 }
 
 .new-order-buyer-table {
   margin-top: 15px;
   border-collapse: collapse;
-  width: 120%; 
+  width: 120%;
 }
 
 .new-order-buyer-table th,
@@ -461,7 +509,7 @@ cursor: pointer;
   padding: 14px;
   text-align: left;
   border-bottom: 1px solid #ddd;
-  font-size: 18px; 
+  font-size: 18px;
 }
 
 .new-order-buyer-button {
@@ -480,7 +528,8 @@ cursor: pointer;
   color: #00ffff;
 }
 
-.new-order-buyer-container input, .new-order-buyer textarea{
+.new-order-buyer-container input,
+.new-order-buyer textarea {
   padding: 6px 10px;
   margin: 10px 0;
   border: 1px solid #ddd;
@@ -489,7 +538,7 @@ cursor: pointer;
 }
 
 .new-order-buyer-container .error {
-  color:  rgb(227 48 188 / 83%);
+  color: rgb(227 48 188 / 83%);
 }
 
 .empty-request h2 {
@@ -512,7 +561,7 @@ cursor: pointer;
   margin-top: 15px;
   margin-left: -70px;
   border-collapse: collapse;
-  width: 125%; 
+  width: 125%;
 }
 
 .make-order-table th,
@@ -520,19 +569,23 @@ cursor: pointer;
   padding: 14px;
   text-align: left;
   border-bottom: 1px solid #ddd;
-  font-size: 18px; 
+  font-size: 18px;
 }
 
 .make-order-container label {
   text-align: left;
   display: block;
 }
+
 .make-order-container h2 {
   font-size: 25px;
   color: rgb(227 48 188 / 83%);
   margin-bottom: 20px;
 }
-.make-order-container input, .make-order-container textarea, .make-order-container select {
+
+.make-order-container input,
+.make-order-container textarea,
+.make-order-container select {
   width: 100%;
   padding: 6px 10px;
   margin: 10px 0;
@@ -540,13 +593,16 @@ cursor: pointer;
   box-sizing: border-box;
   display: block;
 }
-.make-order-container a{
+
+.make-order-container a {
   font-size: 20px;
   padding: 2px;
 }
+
 .make-order-container a:hover {
   color: #00ffff;
 }
+
 .make-order-container button {
   text-decoration: none;
   margin-top: 15px;
@@ -557,15 +613,17 @@ cursor: pointer;
   border-radius: 4px;
   cursor: pointer;
 }
+
 .make-order-container button:hover {
   color: #00ffff;
 }
 
-.make-order-container .inputType{
+.make-order-container .inputType {
   margin-left: -100px;
 }
 
-.make-order-container .error, .cijena {
+.make-order-container .error,
+.cijena {
   color: rgb(227 48 188 / 83%);
 }
 
@@ -598,7 +656,7 @@ cursor: pointer;
   padding: 14px;
   text-align: left;
   border-bottom: 1px solid #ddd;
-  font-size: 18px; 
+  font-size: 18px;
 }
 
 .past-requests-table {
@@ -615,7 +673,7 @@ cursor: pointer;
   padding: 14px;
   text-align: left;
   border-bottom: 1px solid #ddd;
-  font-size: 18px; 
+  font-size: 18px;
 }
 
 .past-requests-button {

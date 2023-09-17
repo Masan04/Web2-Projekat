@@ -67,6 +67,11 @@ export const SetVerification = async (id, isVerified) =>
     return await axios.put(process.env.REACT_APP_API_URL + '/api/User/verify/' + id, user, config);
 }
 
+export const uploadProfilePicture = async (image) =>
+{
+    return await axios.post(process.env.REACT_APP_API_URL + '/api/User/uload-profile-picture' , image)
+}
+
 
 export const AuthUser = () => 
 {

@@ -44,6 +44,11 @@ namespace Projekat.Repository
             return _dataContext.Users.ToList().FindAll(x => x.Type != UserType.ADMIN);
         }
 
+        public List<User> GetAllUsers()
+        {
+            return _dataContext.Users.ToList();
+        }
+
 
         public  User? FindUserById(long id)
         {
